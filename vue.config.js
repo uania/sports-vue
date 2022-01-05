@@ -1,6 +1,6 @@
 
 module.exports = {
-    publicPath: process.env.NODE_ENV === 'production' ? '/test/ugtest' : '/',
+    publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
   
     // 在exports中添加，这里很关键，不配置不行
     transpileDependencies: ['element-ui'],
@@ -15,7 +15,7 @@ module.exports = {
       },
       proxy: {
         '/api ': {
-          target: 'http://local.com:7008/api/',
+          target: 'http://localhost:7008/api/',
           secure: true,
           changeOrigin: true,
           pathRewrite: {

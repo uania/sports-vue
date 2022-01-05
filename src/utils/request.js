@@ -5,7 +5,7 @@ import { ApiToken } from './ApiToken.js'
 
 
 const service = axios.create({
-  baseURL: process.env.VUE_APP_BASE_URL,
+  baseURL: 'http://42.192.81.162/api',
   timeout: 5000
 })
 

@@ -4,10 +4,10 @@
       <h1 class="login-title fx2">登录</h1>
       <div class="loginForm">
         <el-form v-if="loginStyle" ref="form" :model="form" :rules="rules">
-          <el-form-item prop="MobilePhone">
+          <el-form-item prop="Phone">
             <el-input
               placeholder="请输入手机号"
-              v-model.trim="form.MobilePhone"
+              v-model.trim="form.Phone"
               class="areaCode"
             >
               <el-select v-model.trim="areaCode" slot="prepend">
@@ -16,7 +16,7 @@
               <i
                 class="el-icon-circle-close el-input__icon cur"
                 slot="suffix"
-                @click="handleIconClick('MobilePhone')"
+                @click="handleIconClick('Phone')"
               ></i>
             </el-input>
           </el-form-item>
@@ -48,8 +48,7 @@ export default {
       areaCode: "+86",
       //! 登录表单数据
       form: {
-        MobilePhone: "",
-        Code: "",
+        Phone: ""
       },
       //! 是否点击获取验证码
       codeShow: true,
@@ -59,7 +58,7 @@ export default {
       loginStyle: true,
       // !表单验证规则
       rules: {
-        MobilePhone: [
+        Phone: [
           { required: true, message: "请输入您的手机号", trigger: "blur" },
           {
             pattern:
@@ -94,8 +93,11 @@ export default {
     submitForm(form) {
       this.$refs[form].validate((valid) => {
         if (valid) {
-          console.log(this.form.MobilePhone);
-          signin(this.form);
+          console.log(this.form.Phone);
+          var data = {
+            "Params":this.form
+          };
+          signin(data);
         }
       });
     },
