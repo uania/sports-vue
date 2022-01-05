@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function signin (data) {
     return request({
-        url: '/Account/SignIn',
+        url: '/api/Account/SignIn',
         method: 'post',
         data
     })

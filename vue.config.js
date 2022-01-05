@@ -1,30 +1,28 @@
+
 module.exports = {
-    // 在exports中添加，这里很关键，不配置不行,兼容IE
+    publicPath: process.env.NODE_ENV === 'production' ? '/test/ugtest' : '/',
+  
+    // 在exports中添加，这里很关键，不配置不行
     transpileDependencies: ['element-ui'],
-    // 开启eslint代码格式检验
-    lintOnSave: true,
+    chainWebpack (config) {
+      // 在chainWebpack中添加下面的代码
+      config.entry('main').add('babel-polyfill') // main是入口js文件
+    },
     devServer: {
-        // true 则热更新，false 则手动刷新，默认值为 true
-        inline: false,
-        // port: 8888
-        // 启动浏览器
-        open: true,
-        hotOnly: true, // 热更新
-        // host: '0.0.0.0' 开放端口
-        // 配置代理跨域
-        // Proxy : {
-        //     '/api': {
-        //         target: '',  // 后台接口域名
-        //         secure: true, //如果是https接口，需要配在这个参数
-        //         changeOrigin: true, //是否跨域 
-        //         pathRewrite:{
-        //             // '^/api'是一个正则表达式，表示要匹配请求的url中，全部'http://localhost:8081/api' 转接为 http://localhost:8081/
-        //             '^/api': '' //需要代理的路径
-        //         }
-        //     }
-        // },
-        headers: {
-            'Access-Control-Allow-Origin': '*'
-        },
+      open: true,
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      },
+      proxy: {
+        '/api ': {
+          target: 'http://local.com:7008/api/',
+          secure: true,
+          changeOrigin: true,
+          pathRewrite: {
+            '^/api': '/api'
+          }
+        }
+      }
     }
-}
+  }
+  
