@@ -1,9 +1,9 @@
 import request from '@/utils/request'
 
-export function GetIndex (data) {
+export function signin (data) {
     return request({
-        url: '',
-        method: 'get',
+        url: '/Account/SignIn',
+        method: 'post',
         data
     })
 }
